@@ -1,5 +1,4 @@
 # My Personal Blog
----
 ### ToDo
 - Add Seo
 - Add Sitemap
