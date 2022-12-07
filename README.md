@@ -6,4 +6,5 @@
 - Add Icon Breadcrumbs
 - Add Pagination
 - Add Search
+- Add 404
 - Add Optimization and other stuff
