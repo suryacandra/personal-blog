@@ -1,0 +1,29 @@
+---
+const { title, desc, thumb, tags, author, upload_date, url } = Astro.props;
+---
+
+<div class="flex flex-col bg-base-300 rounded-xl shadow-md w-full h-fit overflow-hidden">
+	<!-- <div class="flex justify-center border-2 border-white"> -->
+		<img class="asw" src={thumb} alt={title} id='img' />
+	<!-- </div> -->
+	<div class="flex flex-col p-5">
+		<h1 class="font-bold tracking-wide text-2xl">{title}</h1>
+		<span class="text-sm text-slate-500 italic"><a href='#'>{author}</a> - {upload_date}</span>
+		<div class="flex flex-col">
+			<span>{desc}</span>
+			<a class="btn btn-outline" href={url}>See more</a>
+		</div>
+		<div class="divider"></div>
+		<div class="flex gap-2">
+			{tags.split(',').map(e => <a href={`/tags/${e}`}><button class="btn btn-info">{e}</button></a>)}
+		</div>
+	</div>
+</div>
+
+<style>
+	.asw {
+		width: 100%;
+		height: 250px;
+		object-fit: cover;
+	}
+</style>

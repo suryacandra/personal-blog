@@ -1,0 +1,165 @@
+---
+export interface Props {
+  title: string;
+}
+const posts = await Astro.glob('../pages/posts/*.mdx')
+const arr = []
+const arr1 = []
+for(const key in posts) {
+	posts[key].frontmatter.tags.split(',').forEach(e => arr.push(e))
+	arr1.push(posts[key].frontmatter.upload_date.split(',')[1].trim())
+}
+const tags = [...new Set(arr)]
+const year = [...new Set(arr1)]
+const { title } = Astro.props;
+const {pathname} = Astro.url
+---
+
+<!DOCTYPE html>
+<html data-theme="halloween" lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main>
+      <div class="flex h-screen">
+        <div class="flex flex-col w-full">
+          <header class="navbar bg-base-300">
+            <div class="flex-1">
+              <a class="btn btn-ghost normal-case text-xl" href="/"
+                >Ananta Blog</a
+              >
+            </div>
+            <div class="flex-none">
+              <ul class="menu menu-horizontal p-0">
+                <li><a>Item 1</a></li>
+                <li tabindex="0">
+                  <a>
+                    Parent
+                    <svg
+                      class="fill-current"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      ><path
+                        d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
+                      ></path>
+                    </svg>
+                  </a>
+                  <ul class="p-2 bg-base-100">
+                    <li><a>Submenu 1</a></li>
+                    <li><a>Submenu 2</a></li>
+                  </ul>
+                </li>
+                <li><a>Item 3</a></li>
+              </ul>
+            </div>
+          </header>
+          <div class="flex h-[calc(100vh-64px)]">
+            <main
+              class="flex flex-col w-full bg-base-100 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300"
+            >
+              <div class="flex w-full mx-auto">
+                <div class="flex flex-col w-full h-full gap-2 p-5">
+                  <slot />
+                </div>
+              </div>
+            </main>
+            <nav class="flex w-72 bg-base-300">
+              <div class="w-full flex">
+                <ul class="w-full h-full flex flex-col p-5 gap-2">
+                  <li class="bg-base-100 p-2 shadow-sm">
+                    <h1 class="text-2xl text-center font-bold underline">Categories</h1>
+                    <ul class="menu bg-base-100 w-56 p-2 rounded-box">
+                      <li>
+                        <a>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
+                            ></path>
+                          </svg>
+                          Item 2
+                        </a>
+                      </li>
+                      <li>
+                        <a>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                            ></path>
+                          </svg>
+                          Item 1
+                        </a>
+                      </li>
+                      <li>
+                        <a>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            class="h-5 w-5"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="currentColor"
+                            ><path
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              stroke-width="2"
+                              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
+                            ></path>
+                          </svg>
+                          Item 3
+                        </a>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="bg-base-100 p-2 shadow-sm">
+                    <h1 class="text-2xl text-center font-bold underline">Archive</h1>
+                    <div class="divider m-0"></div>
+                    <div class="flex flex-col gap-2">
+						{year.map(e => <a href={`/archive/${e}`} class="btn btn-outline btn-sm">{e}</a>)}
+                    </div>
+                  </li>
+                 {pathname !== '/tags' && <li class="bg-base-100 p-2 shadow-sm break-words flex flex-col gap-5">
+					<h1 class="text-2xl text-center font-bold underline">Tags</h1>
+					<div class="flex flex-wrap gap-2">
+						{tags.sort(() => 0.5 - Math.random()).map(e => <a class="bg-info px-2 py-2 rounded-xl active:scale-95" href={`tags/${e}`}>{e}</a>)}
+					</div>
+					<a href="/tags">
+						<button class="btn btn-outline">See more</button>
+					</a>
+				  </li>}
+                </ul>
+              </div>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>
+<style is:global>
+  code {
+    font-family: Menlo, Monaco, Lucida Console, Liberation Mono,
+      DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace;
+  }
+</style>

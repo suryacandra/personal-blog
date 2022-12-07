@@ -1,0 +1,20 @@
+---
+import Layout from "../../layouts/Layout.astro";
+const posts = await Astro.glob('../posts/*.mdx')
+const arr = []
+for(const key in posts) {
+	posts[key].frontmatter.tags.split(',').forEach(e => arr.push(e))
+}
+const tags = [...new Set(arr)]
+---
+
+<Layout title="All blog tags">
+    <div class="bg-base-300 p-5">
+        <h1 class="text-center text-4xl font-bold tracking-wide">
+            All tags
+        </h1>
+        <div class="flex flex-wrap gap-2">
+            {tags.sort(() => 0.5 - Math.random()).map(e => <a class="bg-info px-2 py-2 rounded-xl active:scale-95" href={`tags/${e}`}>{e}</a>)}
+        </div>
+    </div>
+</Layout>

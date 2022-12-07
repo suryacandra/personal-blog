@@ -1,0 +1,49 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Card from "../components/Card.astro";
+const posts = await Astro.glob("./posts/*.mdx");
+---
+
+<Layout title="Welcome to Ananta Blog">
+  <div class="grid grid-cols-2 gap-5 p-5">
+    {
+      posts.map(({  url, frontmatter: e }) => (
+        <Card
+          title={e.title}
+          desc={e.desc}
+          thumb={e.thumb}
+          tags={e.tags}
+          author={e.author}
+          upload_date={e.upload_date}
+		  url={url}
+        />
+      ))
+    }
+  </div>
+</Layout>
+
+<script define:vars={{ posts }}>
+  posts.map((e) => console.log(e));
+</script>
+
+<style>
+  /* width */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+</style>

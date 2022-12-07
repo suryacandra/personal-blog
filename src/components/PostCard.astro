@@ -1,0 +1,22 @@
+---
+const {title, author, upload_date, tags} = Astro.props
+---
+
+<div class="bg-base-300 p-5 rounded-xl shadow-md flex flex-col gap-4">
+    <div class="flex flex-col items-center b">
+        <h1 class="text-4xl font-bold tracking-wide">
+            {title}
+        </h1>
+        <div class="flex flex-col items-center italic text-slate-500 text-sm">
+            <span>
+                {author}
+            </span>
+            <span>{upload_date}</span>
+        </div>
+    </div>
+    <slot />
+    <div class="divider">{tags.split(',').map(e => <a href={`tags/${e}`}><button class="btn btn-info">{e}</button></a>)}</div>
+    <div class="bg-base-100 rounded-xl p-5 flex flex-col items-center">
+        Share this post!
+    </div>
+</div>

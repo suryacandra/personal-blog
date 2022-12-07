@@ -1,0 +1,41 @@
+---
+export async function getStaticPaths() {
+  const posts = await Astro.glob("../posts/*.mdx");
+  const tags = []
+  const arr = []
+  for(const key in posts) {
+      posts[key].frontmatter.tags.split(',').forEach(element => {
+        tags.push(element)
+      });
+  }
+  for(const key in tags) {
+    arr.push({
+      params: {
+        tags: tags[key]
+      }
+    })
+  }
+  return arr
+}
+
+import Layout from "../../layouts/Layout.astro";
+import Card from "../../components/Card.astro";
+
+const {tags} = Astro.params
+const posts = await Astro.glob("../posts/*.mdx");
+const arr = []
+for(const key in posts) {
+  if(posts[key].frontmatter.tags.split(',').find(e => e === tags)) {
+    const obj = {
+      ...posts[key].frontmatter,
+      url: posts[key].url
+    }
+    arr.push(obj)
+  }
+}
+---
+<Layout title={`Blog post with tags ${tags}`}>
+  <div class="grid grid-cols-2 gap-5 p-5">
+    {arr.map(e =>  <Card title={e.title} desc={e.desc} thumb={e.thumb} tags={e.tags} author={e.author} upload_date={e.upload_date} url={e.url} /> )}
+  </div>
+</Layout>
