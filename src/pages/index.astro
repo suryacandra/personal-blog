@@ -20,11 +20,8 @@ const posts = await Astro.glob("./posts/*.mdx");
       ))
     }
   </div>
+  
 </Layout>
-
-<script define:vars={{ posts }}>
-  posts.map((e) => console.log(e));
-</script>
 
 <style>
   /* width */
