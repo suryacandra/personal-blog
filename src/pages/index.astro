@@ -5,7 +5,7 @@ const posts = await Astro.glob("./posts/*.mdx");
 ---
 
 <Layout title="Welcome to Ananta Blog">
-  <div class="grid grid-cols-2 gap-5 p-5">
+  <div class="grid grid-cols-1 xs:grid-cols-2 gap-5 p-5">
     {
       posts.map(({  url, frontmatter: e }) => (
         <Card

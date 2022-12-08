@@ -37,32 +37,13 @@ const {pathname} = Astro.url
             <div class="flex-none">
               <ul class="menu menu-horizontal p-0">
                 <li><a>Item 1</a></li>
-                <li tabindex="0">
-                  <a>
-                    Parent
-                    <svg
-                      class="fill-current"
-                      xmlns="http://www.w3.org/2000/svg"
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      ><path
-                        d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"
-                      ></path>
-                    </svg>
-                  </a>
-                  <ul class="p-2 bg-base-100">
-                    <li><a>Submenu 1</a></li>
-                    <li><a>Submenu 2</a></li>
-                  </ul>
-                </li>
                 <li><a>Item 3</a></li>
               </ul>
             </div>
           </header>
-          <div class="flex h-[calc(100vh-64px)]">
+          <div class="flex flex-col md:flex-row h-[calc(100vh-64px)]">
             <main
-              class="flex flex-col w-full bg-base-100 overflow-y-auto scrollbar-thin scrollbar-thumb-slate-700 scrollbar-track-slate-300"
+              class="flex flex-col w-full bg-base-100 md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300"
             >
               <div class="flex w-full mx-auto">
                 <div class="flex flex-col w-full h-full gap-2 p-5">
@@ -70,9 +51,9 @@ const {pathname} = Astro.url
                 </div>
               </div>
             </main>
-            <nav class="flex w-72 bg-base-300">
+            <nav class="flex w-full md:w-72 bg-base-300">
               <div class="w-full flex">
-                <ul class="w-full h-full flex flex-col p-5 gap-2">
+                <ul class="w-full h-full flex flex-col p-5 gap-4">
                   <li class="bg-base-100 p-2 shadow-sm">
                     <h1 class="text-2xl text-center font-bold underline">Category</h1>
                     <ul class="menu bg-base-100 w-56 p-2 rounded-box">
@@ -144,13 +125,19 @@ const {pathname} = Astro.url
 					<div class="flex flex-wrap gap-2">
 						{tags.sort(() => 0.5 - Math.random()).map(e => <a class="bg-info px-2 py-2 rounded-xl active:scale-95" href={`tags/${e}`}>{e}</a>)}
 					</div>
-					<a href="/tags">
+					<a href="/tags" class="mx-auto">
 						<button class="btn btn-outline">See more</button>
 					</a>
 				  </li>}
                 </ul>
               </div>
             </nav>
+            <div class="md:hidden bg-base-300 text-center">
+              Copyright <a href="https://github.com/surycacandra" class="font-bold">Ananta</a>
+              <p>
+                {new Date().getFullYear()}
+              </p> 
+            </div>
           </div>
         </div>
       </div>
