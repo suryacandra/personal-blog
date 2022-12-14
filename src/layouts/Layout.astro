@@ -2,25 +2,25 @@
 export interface Props {
   title: string;
 }
-const posts = await Astro.glob('../pages/posts/*.mdx')
-const arr = []
-const arr1 = []
-for(const key in posts) {
-	posts[key].frontmatter.tags.split(',').forEach(e => arr.push(e))
-	arr1.push(posts[key].frontmatter.upload_date.split(',')[1].trim())
+const posts = await Astro.glob("../pages/posts/*.mdx");
+const arr = [];
+const arr1 = [];
+for (const key in posts) {
+  posts[key].frontmatter.tags.split(",").forEach((e) => arr.push(e));
+  arr1.push(posts[key].frontmatter.upload_date.split(",")[1].trim());
 }
-const tags = [...new Set(arr)]
-const year = [...new Set(arr1)]
+const tags = [...new Set(arr)];
+const year = [...new Set(arr1)];
 const { title } = Astro.props;
-const {pathname} = Astro.url
+const { pathname } = Astro.url;
 ---
 
 <!DOCTYPE html>
-<html id='root' data-theme="halloween" lang="en">
+<html id="root" data-theme="halloween" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
   </head>
@@ -37,36 +37,83 @@ const {pathname} = Astro.url
             <div class="flex-none">
               <ul class="menu menu-horizontal p-0 gap-5">
                 <li class="bg-base-100 hidden xs:block"><a>About Me</a></li>
+                <li class="bg-base-100 hidden xs:block">
+                  <a
+                    href="https://github.com/suryacandra/personal-blog"
+                    target="_blank">Source Code</a
+                  >
+                </li>
                 <label class="swap swap-rotate">
-  
                   <!-- this hidden checkbox controls the state -->
                   <input id="theme" type="checkbox" />
-                  
+
                   <!-- sun icon -->
-                  <svg id='sun' class="swap-on fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"/></svg>
-                  
+                  <svg
+                    id="sun"
+                    class="swap-on fill-current w-8 h-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    ><path
+                      d="M5.64,17l-.71.71a1,1,0,0,0,0,1.41,1,1,0,0,0,1.41,0l.71-.71A1,1,0,0,0,5.64,17ZM5,12a1,1,0,0,0-1-1H3a1,1,0,0,0,0,2H4A1,1,0,0,0,5,12Zm7-7a1,1,0,0,0,1-1V3a1,1,0,0,0-2,0V4A1,1,0,0,0,12,5ZM5.64,7.05a1,1,0,0,0,.7.29,1,1,0,0,0,.71-.29,1,1,0,0,0,0-1.41l-.71-.71A1,1,0,0,0,4.93,6.34Zm12,.29a1,1,0,0,0,.7-.29l.71-.71a1,1,0,1,0-1.41-1.41L17,5.64a1,1,0,0,0,0,1.41A1,1,0,0,0,17.66,7.34ZM21,11H20a1,1,0,0,0,0,2h1a1,1,0,0,0,0-2Zm-9,8a1,1,0,0,0-1,1v1a1,1,0,0,0,2,0V20A1,1,0,0,0,12,19ZM18.36,17A1,1,0,0,0,17,18.36l.71.71a1,1,0,0,0,1.41,0,1,1,0,0,0,0-1.41ZM12,6.5A5.5,5.5,0,1,0,17.5,12,5.51,5.51,0,0,0,12,6.5Zm0,9A3.5,3.5,0,1,1,15.5,12,3.5,3.5,0,0,1,12,15.5Z"
+                    ></path>
+                  </svg>
+
                   <!-- moon icon -->
-                  <svg id='moon' class="swap-off fill-current w-8 h-8" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"/></svg>
-                  
+                  <svg
+                    id="moon"
+                    class="swap-off fill-current w-8 h-8"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    ><path
+                      d="M21.64,13a1,1,0,0,0-1.05-.14,8.05,8.05,0,0,1-3.37.73A8.15,8.15,0,0,1,9.08,5.49a8.59,8.59,0,0,1,.25-2A1,1,0,0,0,8,2.36,10.14,10.14,0,1,0,22,14.05,1,1,0,0,0,21.64,13Zm-9.5,6.69A8.14,8.14,0,0,1,7.08,5.22v.27A10.15,10.15,0,0,0,17.22,15.63a9.79,9.79,0,0,0,2.1-.22A8.11,8.11,0,0,1,12.14,19.73Z"
+                    ></path>
+                  </svg>
                 </label>
-                <label class="btn btn-circle swap swap-rotate xs:hidden">
+                <label class=" swap swap-rotate xs:hidden">
                   <input id="hamburger" type="checkbox" />
-  
+
                   <!-- this hidden checkbox controls the state -->
-                  
+
                   <!-- hamburger icon -->
-                  <svg class="swap-off fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><path d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"/></svg>
-                  
+                  <svg
+                    class="swap-off fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 512 512"
+                    ><path
+                      d="M64,384H448V341.33H64Zm0-106.67H448V234.67H64ZM64,128v42.67H448V128Z"
+                    ></path>
+                  </svg>
+
                   <!-- close icon -->
-                  <svg class="swap-on fill-current" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 512 512"><polygon points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"/></svg>
-                  
+                  <svg
+                    class="swap-on fill-current"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 512 512"
+                    ><polygon
+                      points="400 145.49 366.51 112 256 222.51 145.49 112 112 145.49 222.51 256 112 366.51 145.49 400 256 289.49 366.51 400 400 366.51 289.49 256 400 145.49"
+                    ></polygon>
+                  </svg>
                 </label>
               </ul>
             </div>
           </header>
           <div class="flex flex-col md:flex-row h-[calc(100vh-64px)] relative">
-            <div id="menu" class="ilang absolute top-0">
-              Menu
+            <div id="menu" class="ilang absolute top-0 bg-base-300 w-full p-5">
+              <ul
+                class="flex flex-col gap-2 divide-y-2 divide-base-100 text-center"
+              >
+                <li>About Me</li>
+                <li>
+                  <a
+                    href="https://github.com/suryacandra/personal-blog"
+                    target="_blank">Source Code</a
+                  >
+                </li>
+              </ul>
             </div>
             <main
               class="flex flex-col w-full bg-base-100 md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300"
@@ -77,12 +124,14 @@ const {pathname} = Astro.url
                 </div>
               </div>
             </main>
-            <nav class="flex w-full md:w-72 bg-base-300">
+            <nav class="flex w-full md:w-72 bg-base-300 pt-5 md:p-0">
               <div class="w-full flex">
-                <ul class="w-full h-full flex flex-col px-5 gap-4">
-                  <li class="bg-base-100 p-2 shadow-sm">
-                    <h1 class="text-2xl text-center font-bold underline">Category</h1>
-                    <ul class="menu bg-base-100 w-56 p-2 rounded-box">
+                <ul class="w-full h-full flex flex-col px-5 gap-2">
+                  <h1 class="text-2xl text-center font-bold underline">
+                    Category
+                  </h1>
+                  <li class="bg-base-100 p-2 shadow-sm md:max-h-[25vh] md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300 rounded-md">
+                    <ul class="menu bg-base-100 w-56 rounded-box">
                       <li>
                         <a>
                           <svg
@@ -139,30 +188,59 @@ const {pathname} = Astro.url
                       </li>
                     </ul>
                   </li>
-                  <li class="bg-base-100 p-2 shadow-sm">
-                    <h1 class="text-2xl text-center font-bold underline">Archive</h1>
-                    <div class="divider m-0"></div>
+                  <h1 class="text-2xl text-center font-bold underline">
+                    Archive
+                  </h1>
+                  <li class="bg-base-100 p-2 shadow-sm md:max-h-[25vh] md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300 rounded-md">
                     <div class="flex flex-col gap-2">
-						{year.map(e => <a href={`/archive/${e}`} class="btn btn-outline btn-sm">{e}</a>)}
+                      {
+                        year.splice(0, 3).map((e) => (
+                          <a
+                            href={`/archive/${e}`}
+                            class="btn btn-outline btn-sm"
+                          >
+                            {e}
+                          </a>
+                        ))
+                      }
                     </div>
                   </li>
-                 {pathname !== '/tags' && <li class="bg-base-100 p-2 shadow-sm break-words flex flex-col gap-5">
-					<h1 class="text-2xl text-center font-bold underline">Tags</h1>
-					<div class="flex flex-wrap gap-2">
-						{tags.sort(() => 0.5 - Math.random()).map(e => <a class="bg-info px-2 py-2 rounded-xl active:scale-95" href={`tags/${e}`}>{e}</a>)}
-					</div>
-					<a href="/tags" class="mx-auto">
-						<button class="btn btn-outline">See more</button>
-					</a>
-				  </li>}
+                  {
+                    pathname !== "/tags" && (
+                      <h1 class="text-2xl text-center font-bold underline">
+                        Tags
+                      </h1>
+                      <li class="bg-base-100 p-2 shadow-sm break-words flex flex-col gap-5 md:max-h-[25vh] md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300 rounded-md">
+                        <div class="flex flex-wrap items-center justify-center gap-2 text-white">
+                          {tags
+                            .splice(0, 15)
+                            .sort(() => 0.5 - Math.random())
+                            .map((e) => (
+                              <a
+                                class="bg-info px-2 py-2 rounded-xl active:scale-95"
+                                href={`tags/${e}`}
+                              >
+                                {e}
+                              </a>
+                            ))}
+                        </div>
+                        <a href="/tags" class="mx-auto">
+                          <button class="btn btn-outline btn-sm">See more</button>
+                        </a>
+                      </li>
+                    )
+                  }
                 </ul>
               </div>
             </nav>
-            <div class="md:hidden bg-base-300 text-center">
-              Copyright <a href="https://github.com/surycacandra" class="font-bold">Ananta</a>
+            <div class="md:hidden bg-base-300 text-center pt-5">
+              Copyright <a
+                href="https://github.com/surycacandra"
+                class="font-bold">Ananta</a
+              >
               <p>
                 {new Date().getFullYear()}
-              </p> 
+              </p>
             </div>
           </div>
         </div>
@@ -171,47 +249,47 @@ const {pathname} = Astro.url
   </body>
 </html>
 <script>
-  const ham = document.getElementById('hamburger')
-  const menu = document.getElementById('menu')
-  const theme = document.getElementById('theme') as HTMLInputElement
-  const root = document.getElementById('root')
+  const ham = document.getElementById("hamburger");
+  const menu = document.getElementById("menu");
+  const theme = document.getElementById("theme") as HTMLInputElement;
+  const root = document.getElementById("root");
+  const themeTitle = "pastel"
 
-  let toogleMenu = false
-  let toogleTheme = JSON.parse(localStorage.getItem('mode')) || false 
-  if(toogleTheme) {
-    root.setAttribute('data-theme', 'lofi')
-    theme.checked = true
+  let toogleMenu = false;
+  let toogleTheme = JSON.parse(localStorage.getItem("mode")) || false;
+  if (toogleTheme) {
+    root.setAttribute("data-theme", themeTitle);
+    theme.checked = true;
   }
-
 
   theme.onchange = (e) => {
-    if(!toogleTheme) {
-      root.setAttribute('data-theme', 'lofi')
-      toogleTheme = true
-      JSON.stringify(localStorage.setItem('mode', toogleTheme))
-      return
+    if (!toogleTheme) {
+      root.setAttribute("data-theme", themeTitle);
+      toogleTheme = true;
+      JSON.stringify(localStorage.setItem("mode", toogleTheme));
+      return;
     }
-    if(toogleTheme) {
-      root.setAttribute('data-theme', 'halloween')
-      toogleTheme = false
-      JSON.stringify(localStorage.setItem('mode', toogleTheme))
-      return
+    if (toogleTheme) {
+      root.setAttribute("data-theme", "halloween");
+      toogleTheme = false;
+      JSON.stringify(localStorage.setItem("mode", toogleTheme));
+      return;
     }
-  }
+  };
 
   ham.onchange = (e) => {
-    if(!toogleMenu) {
-      menu.style.display = 'block'
-      toogleMenu = true
-      return
+    if (!toogleMenu) {
+      menu.style.display = "block";
+      toogleMenu = true;
+      return;
     }
-    if(toogleMenu) {
-      menu.style.display = 'none'
-      toogleMenu = false
-      return
+    if (toogleMenu) {
+      menu.style.display = "none";
+      toogleMenu = false;
+      return;
     }
-  }
-  console.log(toogleMenu)
+  };
+  console.log(toogleMenu);
 </script>
 <style is:global>
   code {

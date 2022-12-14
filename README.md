@@ -10,3 +10,5 @@
 - Add Optimization and other stuff
 # Demo
 https://ananta-blog.vercel.app/
+# Note
+- Bug on dark theme toggle

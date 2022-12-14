@@ -15,8 +15,12 @@ const {title, author, upload_date, tags} = Astro.props
         </div>
     </div>
     <slot />
-    <div class="divider">{tags.split(',').map(e => <a href={`tags/${e}`}><button class="btn btn-info">{e}</button></a>)}</div>
+    <div class="divider">Tags</div>
+        <div class="flex flex-wrap items-center justify-center gap-2">
+            {tags.split(',').map(e => <a href={`tags/${e}`}><button class="btn btn-info">{e}</button></a>)}
+        </div>
+    <div class="divider">Share this post ! </div>
     <div class="bg-base-100 rounded-xl p-5 flex flex-col items-center">
-        Share this post!
+        
     </div>
 </div>

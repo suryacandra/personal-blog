@@ -23,6 +23,6 @@ module.exports = {
 	},
 	plugins: [require("daisyui"),  require('tailwind-scrollbar'),],
 	daisyui: {
-		themes: ["halloween", "lofi"],
+		themes: ["halloween", "pastel"],
 	  },
 }
