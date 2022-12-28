@@ -1,6 +1,6 @@
 ---
-import {posts} from "../lib/lib.astro"
-import Layout from "../layouts/Layout.astro";
+const posts = await Astro.glob('./posts/*.mdx')
+import Layout from "../components/Layout.astro";
 import ListCard from "../components/ListCard.astro";
 ---
 

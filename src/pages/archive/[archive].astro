@@ -1,14 +1,16 @@
 ---
-import { getPosts } from "../../lib/lib.astro";
+const posts = await Astro.glob('../posts/*.mdx')
 export async function getStaticPaths() {
-  const paths = getPosts("upload_date")
-  return paths
-}
+  const test = await Astro.glob('../posts/*.mdx')
+  return test.map((e:any) => ({
+        params: {
+            archive: e.upload_date.split(",")[1].trim().replace(/[ ]/g, '_')
+        }
+    }))}
 
-import Layout from "../../layouts/Layout.astro";
+import Layout from "../../components/Layout.astro";
 import ListCard from "../../components/ListCard.astro";
 
-const {posts} = Astro.props
 const {archive} = Astro.params
 const arr = posts.filter((e:any) => e.upload_date.split(',')[1].trim() === archive).sort((a:any, b:any) => a.frontmatter.id - b.frontmatter.id)
 ---

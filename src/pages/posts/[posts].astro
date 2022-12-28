@@ -1,15 +1,16 @@
 ---
-import { getPosts } from "../../lib/lib.astro";
+const posts = await Astro.glob('./*.mdx')
 export async function getStaticPaths() {
-  const paths = getPosts("posts")
-  return paths
-}
-
-import Layout from "../../layouts/Layout.astro";
-const {posts} = Astro.params
-const {posts: data} = Astro.props
-const find = data.find(e => e.title.replace(/[ ]/g, '_') === posts)
-const {Content, title, sub, thumb, desc, tags} = find
+  const test = await Astro.glob('./*.mdx')
+  return test.map((e:any) => ({
+        params: {
+            posts: e.title.replace(/[ ]/g, '_')
+        }
+    }))}
+import Layout from "../../components/Layout.astro";
+const {posts: data} = Astro.params
+const find = posts.find((e:any) => e.title.replace(/[ ]/g, '_') === data)
+const {Content, title, sub, thumb, desc, tags}:any = find
 ---
 <Layout title={title} sub={sub} thumb={thumb} desc={desc} tags={tags}>
   <Content /> 

@@ -109,9 +109,11 @@ const domain = Astro.url
   table_content_arrow.onclick = (e) => {
     if(button) {
       table_content.classList.add('hidden')
+      table_content.classList.remove('flex')
       table_content_arrow.innerHTML = '<path fill="white" d="m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4Z"/>'
     } else {
       table_content.classList.remove('hidden')
+      table_content.classList.add('flex')
       table_content_arrow.innerHTML = '<path fill="white" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6l-6 6z"/>'
     }
     button = !button

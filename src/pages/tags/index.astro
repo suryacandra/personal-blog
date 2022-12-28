@@ -1,6 +1,6 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import {posts} from "../../lib/lib.astro"
+import Layout from "../../components/Layout.astro";
+const posts = await Astro.glob('../posts/*.mdx')
 const arr = posts.map((e:any) => e.tags).toString().split(',')
 const tags = [...new Set(arr)].sort((a, b) => a.localeCompare(b))
 ---
