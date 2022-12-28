@@ -14,8 +14,10 @@ import compress from "astro-compress";
 
 // https://astro.build/config
 import prefetch from "@astrojs/prefetch";
-
 import robotsTxt from 'astro-robots-txt';
+
+// https://astro.build/config
+import vercel from "@astrojs/vercel/static";
 
 // https://astro.build/config
 export default defineConfig({
@@ -25,6 +27,8 @@ export default defineConfig({
       applyBaseStyles: false
     }
   }), mdx(), sitemap(), compress(), prefetch(), robotsTxt({
-    sitemap: false,
-  })]
+    sitemap: false
+  })],
+  output: "server",
+  adapter: vercel()
 });
