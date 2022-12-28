@@ -1,34 +1,49 @@
 ---
 export interface Props {
   title: string;
+  sub: string;
+  thumb: string;
+  desc?: string;
+  tags?: string;
 }
-const posts = await Astro.glob("../pages/posts/*.mdx");
-const arr = [];
-const arr1 = [];
-for (const key in posts) {
-  posts[key].frontmatter.tags.split(",").forEach((e) => arr.push(e));
-  arr1.push(posts[key].frontmatter.upload_date.split(",")[1].trim());
-}
-const tags = [...new Set(arr)];
-const year = [...new Set(arr1)];
-const { title } = Astro.props;
+import "../style/base.css"
+import { SEO } from "astro-seo";
+import {posts} from "../lib/lib.astro"
+const tags = [...new Set(posts.map((e:any) => e.tags).toString().split(','))]
+const year = [... new Set(posts.map((e:any) => e.upload_date.split(',')[1].trim()))]
+const categories = [... new Set(posts.map((e:any) => e.cate).toString().split(','))]
+const { title, sub, thumb, desc, tags: tag } = Astro.props;
 const { pathname } = Astro.url;
 ---
 
 <!DOCTYPE html>
-<html id="root" data-theme="halloween" lang="en">
+<html id="root" data-theme="halloween" lang="en" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.png" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
+    <meta name="keywords" content={tag ? tag : "blog, personal blog, javascript blog, github blog"} />
+    <SEO
+      title={title}
+      description={desc ? desc : sub}
+      openGraph={{
+        basic: {
+          title: sub,
+          type: "blog",
+          image: thumb,
+        },
+        image: {
+          alt: sub
+        }
+      }}
+    />
   </head>
   <body>
-    <main>
-      <div class="flex h-screen">
+    <main class="relative">
+      <div class="flex h-full md:h-screen">
         <div class="flex flex-col w-full">
-          <header class="navbar bg-base-300">
+          <header class="navbar bg-base-300 sticky top-0 z-50">
             <div class="flex-1">
               <a class="btn btn-ghost normal-case text-xl" href="/"
                 >Ananta Blog</a
@@ -101,7 +116,7 @@ const { pathname } = Astro.url;
               </ul>
             </div>
           </header>
-          <div class="flex flex-col md:flex-row h-[calc(100vh-64px)] relative">
+          <div class="flex flex-col md:flex-row h-full md:h-[calc(100vh-64px)] relative">
             <div id="menu" class="ilang absolute top-0 bg-base-300 w-full p-5">
               <ul
                 class="flex flex-col gap-2 divide-y-2 divide-base-100 text-center"
@@ -126,106 +141,73 @@ const { pathname } = Astro.url;
             </main>
             <nav class="flex w-full md:w-72 bg-base-300 pt-5 md:p-0">
               <div class="w-full flex">
-                <ul class="w-full h-full flex flex-col px-5 gap-2">
-                  <h1 class="text-2xl text-center font-bold underline">
-                    Category
-                  </h1>
-                  <li class="bg-base-100 p-2 shadow-sm md:max-h-[25vh] md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300 rounded-md">
-                    <ul class="menu bg-base-100 w-56 rounded-box">
-                      <li>
-                        <a>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            ><path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                            ></path>
-                          </svg>
-                          Item 2
-                        </a>
-                      </li>
-                      <li>
-                        <a>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            ><path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                            ></path>
-                          </svg>
-                          Item 1
-                        </a>
-                      </li>
-                      <li>
-                        <a>
-                          <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            class="h-5 w-5"
-                            fill="none"
-                            viewBox="0 0 24 24"
-                            stroke="currentColor"
-                            ><path
-                              stroke-linecap="round"
-                              stroke-linejoin="round"
-                              stroke-width="2"
-                              d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"
-                            ></path>
-                          </svg>
-                          Item 3
-                        </a>
-                      </li>
-                    </ul>
-                  </li>
-                  <h1 class="text-2xl text-center font-bold underline">
-                    Archive
-                  </h1>
-                  <li class="bg-base-100 p-2 shadow-sm md:max-h-[25vh] md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300 rounded-md">
-                    <div class="flex flex-col gap-2">
+                <ul class="w-full h-full flex flex-col justify-evenly px-5 gap-5">
+                  <li class="bg-base-100 p-2 shadow-sm md:max-h-[25vh] md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300 rounded-md flex flex-col gap-5">
+                    <h1 class="text-2xl text-center font-bold underline">
+                      Categories
+                    </h1>
+                    <div class="flex flex-col items-center gap-2">
                       {
-                        year.splice(0, 3).map((e) => (
+                        categories.slice(0, 3).map((e) => (
                           <a
-                            href={`/archive/${e}`}
-                            class="btn btn-outline btn-sm"
+                          rel="prefetch" 
+                            href={`/categories/${e}`}
+                            class="p-2 border-2 border-slate-400 border-opacity-80 rounded-xl w-full"
                           >
                             {e}
                           </a>
                         ))
                       }
+                      <a rel="prefetch"  href="/categories">
+                        <button class="btn btn-outline btn-sm btn-info">See more</button>
+                      </a>
+                    </div>
+                  </li>
+                  <li class="bg-base-100 p-2 shadow-sm md:max-h-[25vh] md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300 rounded-md flex flex-col gap-5">
+                    <h1 class="text-2xl text-center font-bold underline">
+                      Archive
+                    </h1>
+                    <div class="flex flex-col items-center gap-2">
+                      {
+                        year.slice(0, 3).map((e) => (
+                          <a
+                          rel="prefetch" 
+                            href={`/archive/${e}`}
+                            class="btn btn-outline btn-sm w-full"
+                          >
+                            {e}
+                          </a>
+                        ))
+                      }
+                      <a rel="prefetch"  href="/archive">
+                        <button class="btn btn-outline btn-sm btn-info">See more</button>
+                      </a>
                     </div>
                   </li>
                   {
                     pathname !== "/tags" && (
-                      <h1 class="text-2xl text-center font-bold underline">
-                        Tags
-                      </h1>
                       <li class="bg-base-100 p-2 shadow-sm break-words flex flex-col gap-5 md:max-h-[25vh] md:overflow-y-auto md:scrollbar-thin md:scrollbar-thumb-slate-700 md:scrollbar-track-slate-300 rounded-md">
+                        <h1 class="text-2xl text-center font-bold underline">
+                          Tags
+                        </h1>
                         <div class="flex flex-wrap items-center justify-center gap-2 text-white">
                           {tags
                             .splice(0, 15)
                             .sort(() => 0.5 - Math.random())
                             .map((e) => (
                               <a
+                              rel="prefetch" 
                                 class="bg-info px-2 py-2 rounded-xl active:scale-95"
-                                href={`tags/${e}`}
+                                href={`/tags/${e.replace(' ', '_')}`}
                               >
                                 {e}
                               </a>
                             ))}
                         </div>
-                        <a href="/tags" class="mx-auto">
-                          <button class="btn btn-outline btn-sm">See more</button>
+                        <a 
+                        rel="prefetch" 
+                        href="/tags" class="mx-auto">
+                          <button class="btn btn-outline btn-info btn-sm">See more</button>
                         </a>
                       </li>
                     )
@@ -245,6 +227,9 @@ const { pathname } = Astro.url;
           </div>
         </div>
       </div>
+      <div id="toTop" class="fixed md:hidden flex items-center justify-center animate-bounce right-2 bottom-5 bg-primary-content w-[15vw] h-[15vw] rounded-full cursor-pointer">
+        <svg width="32" height="32" viewBox="0 0 24 24"><path fill="#888888" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6l-6 6z"/></svg>
+      </div>
     </main>
   </body>
 </html>
@@ -253,6 +238,7 @@ const { pathname } = Astro.url;
   const menu = document.getElementById("menu");
   const theme = document.getElementById("theme") as HTMLInputElement;
   const root = document.getElementById("root");
+  const toTop = document.getElementById("toTop")
   const themeTitle = "pastel"
 
   let toogleMenu = false;
@@ -289,7 +275,23 @@ const { pathname } = Astro.url;
       return;
     }
   };
-  console.log(toogleMenu);
+
+  
+  window.onscroll = (e) => {
+    if(window.scrollY < 50) {
+      toTop.classList.add('hidden')
+    } 
+    if(window.scrollY > 50) {
+      toTop.classList.remove('hidden')
+      toTop.classList.add('visible')
+    }
+    console.log(window.scrollY)
+  }
+
+  toTop.onclick = (e) => {
+    window.scroll(0, 0)
+  }
+
 </script>
 <style is:global>
   code {

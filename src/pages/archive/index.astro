@@ -1,0 +1,19 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ListCard from "../../components/ListCard.astro";
+import {posts} from "../../lib/lib.astro"
+const years = posts.map((e:any)=> e.upload_date.split(',')[1].trim())
+const arr = [...new Set(years)]
+---
+
+<Layout title="Archive posts in Ananta Blog" sub="Best article posts in archive" thumb="/favicon.png">
+    {arr.sort((a, b) => parseInt(b) - parseInt(a)).map(e => 
+       <div class="flex justify-between bg-info p-2">
+        <h1 class="text-2xl">All {e} Post</h1>
+        <button class="btn btn-outline btn-sm">
+            <a rel="prefetch"  href={`/archive/${e}`}>See more</a>
+        </button>
+    </div>
+      <ListCard posts={posts} e={e} content="archive" />
+    )}
+</Layout>

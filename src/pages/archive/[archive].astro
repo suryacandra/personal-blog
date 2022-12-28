@@ -1,0 +1,18 @@
+---
+import { getPosts } from "../../lib/lib.astro";
+export async function getStaticPaths() {
+  const paths = getPosts("upload_date")
+  return paths
+}
+
+import Layout from "../../layouts/Layout.astro";
+import ListCard from "../../components/ListCard.astro";
+
+const {posts} = Astro.props
+const {archive} = Astro.params
+const arr = posts.filter((e:any) => e.upload_date.split(',')[1].trim() === archive).sort((a:any, b:any) => a.frontmatter.id - b.frontmatter.id)
+---
+<Layout  title={`Post in archive ${archive}`} sub="Best article posts in archive" thumb="/favicon.png">
+    <h1 class="text-2xl bg-info p-2">All {archive} Post</h1>
+  <ListCard posts={arr} e={false} content="main" />
+</Layout>

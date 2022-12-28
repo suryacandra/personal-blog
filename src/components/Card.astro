@@ -1,22 +1,27 @@
 ---
-const { title, desc, thumb, tags, author, upload_date, url } = Astro.props;
+const { title, cate, thumb, tags, author, upload_date, url } = Astro.props;
 ---
 
-<div class="flex flex-col bg-base-300 rounded-xl shadow-md w-full h-fit overflow-hidden">
+<div class="flex flex-col bg-base-300 rounded-xl shadow-md w-full h-full overflow-hidden">
 	<!-- <div class="flex justify-center border-2 border-white"> -->
 		<img class="asw max-h-[20vh] sm:max-h-[30vh] md:max-h-[40vh]" src={thumb} alt={title} id='img' />
 	<!-- </div> -->
-	<div class="flex flex-col p-5">
-		<h1 class="font-bold tracking-wide text-2xl">{title}</h1>
-		<span class="text-sm text-slate-500 italic"><a href='#'>{author}</a> - {upload_date}</span>
-		<div class="flex flex-col">
-			<span>{desc}</span>
-			<a class="btn btn-outline btn-sm" href={url}>See more</a>
+	<div class="flex flex-col justify-between p-5 h-full">
+		<div>
+			<a rel="prefetch" href={`/posts/${title.replace(/[ ]/g, '_')}`} class="cursor-pointer hover:text-primary-focus">
+				<h1 class="font-bold text-4xl">{title}</h1>
+			</a>
+			<span class="text-sm text-slate-500 italic"><a rel="prefetch" href='#'>{author}</a> - {upload_date}</span>
+			<div class="flex items-center gap-2 mt-1">
+				in {cate.split(',').map(e => <a class="bg-slate-600 text-white py-1 px-2 rounded-xl text-md cursor-pointer hover:text-primary-focus" rel="prefetch" href={`/categories/${e}`}>{e}</a>)}
+			</div>
 		</div>
-		<div class="divider"></div>
-		<div class="flex gap-2 flex-wrap">
-			{tags.split(',').splice(0, 5).map(e => e.length < 8 && <a href={`/tags/${e}`}><button class="btn btn-info btn-sm">{e}</button></a>)}
-			{tags.split(',').length > 5 &&  <a href={url}><button class="btn btn-info btn-sm">...</button></a> }
+		<div class="w-full flex flex-col">
+			<div class="divider m-2 w-full self-center">Tags</div>
+			<div class="flex gap-2 flex-wrap">
+				{tags.split(',').slice(0, 5).map(e => <a rel="prefetch" href={`/tags/${e.replace(' ', '_')}`}><button class="btn btn-info btn-sm">{e}</button></a>)}
+				{tags.split(',').length > 5 &&  <a rel="prefetch" href={`/posts/${title.replace(/[ ]/g, '_')}`}><button class="btn btn-info btn-sm">...</button></a> }
+			</div>
 		</div>
 	</div>
 </div>

@@ -1,14 +1,13 @@
 # My Personal Blog
 ### ToDo
-- Add Seo
-- Add Sitemap
-- Add Category
+- Add Seo done
+- Add Sitemap done
+- Add Category done
 - Add Icon Breadcrumbs
 - Add Pagination
 - Add Search
 - Add 404
-- Add Optimization and other stuff
+- Add Optimization and other stuff almost done
 # Demo
-https://ananta-blog.vercel.app/
+https://www.dwiananta.link
 # Note
-- Bug on dark theme toggle

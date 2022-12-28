@@ -1,41 +1,18 @@
 ---
+import { getPosts } from "../../lib/lib.astro";
 export async function getStaticPaths() {
-  const posts = await Astro.glob("../posts/*.mdx");
-  const tags = []
-  const arr = []
-  for(const key in posts) {
-      posts[key].frontmatter.tags.split(',').forEach(element => {
-        tags.push(element)
-      });
-  }
-  for(const key in tags) {
-    arr.push({
-      params: {
-        tags: tags[key]
-      }
-    })
-  }
+  const arr = getPosts('tags')
   return arr
 }
 
 import Layout from "../../layouts/Layout.astro";
-import Card from "../../components/Card.astro";
+import ListCard from "../../components/ListCard.astro";
 
+const {posts} = Astro.props
 const {tags} = Astro.params
-const posts = await Astro.glob("../posts/*.mdx");
-const arr = []
-for(const key in posts) {
-  if(posts[key].frontmatter.tags.split(',').find(e => e === tags)) {
-    const obj = {
-      ...posts[key].frontmatter,
-      url: posts[key].url
-    }
-    arr.push(obj)
-  }
-}
+const arr = posts.filter((e:any) => e.tags.split(',').includes(tags.replace('_', ' '))).sort((a:any, b:any) => a.frontmatter.id - b.frontmatter.id)
 ---
-<Layout title={`Blog post with tags ${tags}`}>
-  <div class="grid grid-cols-2 gap-5 p-5">
-    {arr.map(e =>  <Card title={e.title} desc={e.desc} thumb={e.thumb} tags={e.tags} author={e.author} upload_date={e.upload_date} url={e.url} /> )}
-  </div>
+<Layout title={`Post in tags ${tags}`} sub="Best article posts in tags" thumb="/favicon.png">
+  <h1 class="text-2xl bg-info p-2">All {tags.replace('_', ' ')} Post</h1>
+  <ListCard posts={arr} e={false} content='main' />
 </Layout>

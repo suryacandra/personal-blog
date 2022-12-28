@@ -1,0 +1,35 @@
+---
+title: 'Here why javascript is my favorite language'
+sub: 'Why you should learn javascript because of this!'
+desc: 'JavaScript has always been my favorite programming language, and there are several reasons why. First and foremost, it is a versatile and widely used language that can be found in almost every modern web application. This means that, as a JavaScript developer, I have a plethora of job opportunities and projects to choose from.'
+cate: 'Programming'
+thumb: '/programming.jpg'
+tags: 'javascript'
+author: 'admin'
+upload_date: '28 December, 2022'
+id: 2
+---
+export const {title, sub, desc, cate, tags, thumb, author, upload_date} = frontmatter
+import PostCard from '../components/PostCard.astro'
+import Image from '../components/Image.astro'
+import Paragraph from '../components/Paragraph.astro'
+
+<PostCard title={title} cate={cate} author={author} tags={tags} upload_date={upload_date}>
+<Image img={thumb} w='100%' h='250px' p='cover' />
+<Paragraph id='1' title='JavaScript has always been my favorite programming language, and there are several reasons why.'>
+First and foremost, it is a versatile and widely used language that can be found in almost every modern web application. This means that, as a JavaScript developer, I have a plethora of job opportunities and projects to choose from.
+One of the things I love most about JavaScript is its flexibility. It can be used on the front-end and back-end of web development, as well as for creating desktop and mobile applications. This versatility allows me to take on a variety of projects and continually learn and grow as a developer.
+</Paragraph>
+<Paragraph id='2' title='JavaScript also has a vast and active community, with thousands of libraries, frameworks, and tools available for use.'>
+These resources make it easier for me to develop complex applications in a shorter amount of time and also provide a wealth of knowledge and support from other developers.
+Another reason JavaScript is my favorite language is its simplicity. It is an easy language to learn, especially for those who are new to programming. The syntax is straightforward, and there are plenty of online tutorials and resources available to help beginners get started.
+</Paragraph>
+<Paragraph id='3' title='However, simplicity does not equate to a lack of power. '>
+JavaScript has a number of advanced features and capabilities that allow me to create highly interactive and dynamic web applications. It is also constantly evolving and improving, with new versions being released regularly.
+One thing that sets JavaScript apart from other programming languages is its ability to interact with the Document Object Model (DOM). The DOM is a tree-like structure that represents the elements and objects on a webpage. JavaScript allows me to manipulate and alter the DOM, which gives me complete control over the appearance and functionality of a webpage. In addition to its many practical benefits, I also find JavaScript to be a fun and enjoyable language to work with. Its simplicity and versatility allow me to easily experiment and try out new ideas, and the active community provides endless inspiration and support.
+</Paragraph>
+<Paragraph id='4' title='Overall, JavaScript is my favorite programming language because of its versatility, simplicity, and power. '>
+Its widespread use, active community, and ability to interact with the DOM make it an essential tool for any web developer. Its constantly evolving nature also keeps me motivated to learn and grow as a developer. For all these reasons and more, JavaScript will always be my go-to language.
+</Paragraph>
+</PostCard>
+

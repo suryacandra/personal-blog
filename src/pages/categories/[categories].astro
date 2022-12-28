@@ -1,0 +1,18 @@
+---
+import { getPosts } from "../../lib/lib.astro";
+export async function getStaticPaths() {
+  const arr = getPosts('categories')
+  return arr
+}
+
+import Layout from "../../layouts/Layout.astro";
+import ListCard from "../../components/ListCard.astro";
+
+const {posts} = Astro.props
+const {categories} = Astro.params
+const arr = posts.filter((e:any) => e.cate.split(',').includes(categories.replace('_', ' '))).sort((a:any, b:any) => a.frontmatter.id - b.frontmatter.id)
+---
+<Layout title={`Post in categories ${categories}`} sub="Best article posts in categories" thumb="/favicon.png">
+  <h1 class="text-2xl bg-info p-2">All {categories.replace('_', ' ')} Post</h1>
+  <ListCard posts={arr} e={false} content='main' />
+</Layout>

@@ -1,0 +1,20 @@
+---
+const {posts, e, content} = Astro.props
+import Card from "./Card.astro";
+---
+
+
+<div class="grid grid-cols-1 xs:grid-cols-2 gap-5 p-2"> 
+    {posts.filter((a:any) => content === 'categories' && a.cate.split(',').includes(e) || content === 'archive' && a.upload_date.split(',')[1].trim() === e || (content === 'main' || content === 'latest') && !e && a).map(({  url, title, cate, thumb, tags, author, upload_date }: any) => 
+        <Card
+        title={title}
+        cate={cate}
+        thumb={thumb}
+        tags={tags}
+        author={author}
+        upload_date={upload_date}
+        url={url}
+  />
+    ).slice(0, content !== 'latest' ? posts.length : 4)
+    }
+</div>

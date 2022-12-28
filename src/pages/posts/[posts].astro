@@ -1,0 +1,17 @@
+---
+import { getPosts } from "../../lib/lib.astro";
+export async function getStaticPaths() {
+  const paths = getPosts("posts")
+  return paths
+}
+
+import Layout from "../../layouts/Layout.astro";
+const {posts} = Astro.params
+const {posts: data} = Astro.props
+const find = data.find(e => e.title.replace(/[ ]/g, '_') === posts)
+const {Content, title, sub, thumb, desc, tags} = find
+---
+<Layout title={title} sub={sub} thumb={thumb} desc={desc} tags={tags}>
+  <Content /> 
+</Layout>
+

@@ -1,0 +1,9 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ListCard from "../../components/ListCard.astro";
+import { posts } from "../../lib/lib.astro";
+---
+
+<Layout title="Latest posts in Ananta Blog" sub="Best article posts in latest" thumb="/favicon.png">
+    <ListCard posts={posts.sort((a:any, b:any) => a.frontmatter.id - b.frontmatter.id)} e={false} content='main' />
+</Layout>

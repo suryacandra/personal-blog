@@ -1,20 +1,17 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-const posts = await Astro.glob('../posts/*.mdx')
-const arr = []
-for(const key in posts) {
-	posts[key].frontmatter.tags.split(',').forEach(e => arr.push(e))
-}
+import {posts} from "../../lib/lib.astro"
+const arr = posts.map((e:any) => e.tags).toString().split(',')
 const tags = [...new Set(arr)].sort((a, b) => a.localeCompare(b))
 ---
 
-<Layout title="All blog tags">
+<Layout title="Tags in Ananta Blog" sub="All tags in this blog" thumb="/favicon.png">
     <div class="bg-base-300 p-5 flex flex-col gap-5">
         <h1 class="text-center text-4xl font-bold tracking-wide">
             All tags
         </h1>
         <div class="flex flex-wrap gap-2">
-            {tags.map(e => <a class="bg-info px-2 py-2 rounded-xl active:scale-95" href={`tags/${e}`}>{e}</a>)}
+            {tags.map(e => <a class="bg-info px-2 py-2 rounded-xl active:scale-95" rel="prefetch"  href={`tags/${e.replace(' ', '_')}`}>{e}</a>)}
         </div>
     </div>
 </Layout>

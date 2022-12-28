@@ -1,0 +1,33 @@
+---
+export const posts = await Astro.glob("../article/*.mdx");
+export const getPosts = async (value) => {
+  const posts = await Astro.glob("../article/*.mdx");
+  const temp = posts.map(
+    (e: any) =>
+      (value === "upload_date" && e.upload_date.split(",")[1].trim()) ||
+      (value === "tags" && e.tags) ||
+      (value === "categories" && e.cate)  ||
+      (value === "posts" && e.title) 
+  )
+  const stringArr = value === 'tags' && [...new Set(temp)].toString().split(',') || value === 'categories' && [...new Set(temp)].toString().split(',') || false
+  const paths = value === "tags" && 'tags' || value === "categories" && 'categories' || value === 'upload_date' &&  'archive' || value === "posts" && 'posts'
+  const arr = stringArr ? stringArr.map(e => ({
+        params: {
+            [paths]: e.replace(/[ ]/g, '_')
+        },
+        props: {
+          posts: posts
+        }
+    })) : temp.map((e) => {
+    return {
+        params: {
+            [paths]: e.replace(/[ ]/g, '_')
+        },
+        props: {
+          posts: posts
+        }
+    }
+  })
+  return arr;
+};
+---

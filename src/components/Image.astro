@@ -1,13 +1,9 @@
 ---
-const {img} = Astro.props
+const {img, w, h, p} = Astro.props
+const position = {
+	full: 'object-scale-down',
+	cover: 'object-cover'
+}
 ---
 
-<img src={img} alt="" class="asw">
-
-<style>
-	.asw {
-		width: 100%;
-		height: 250px;
-		object-fit: cover;
-	}
-</style>
+<img src={img} alt="" class={`${position[p]}`} style={`width: ${w};height: ${h}`}>
