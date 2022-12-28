@@ -29,6 +29,6 @@ export default defineConfig({
   }), mdx(), sitemap(), compress(), prefetch(), robotsTxt({
     sitemap: false
   })],
-  output: "server",
+  output: "static",
   adapter: vercel()
 });
