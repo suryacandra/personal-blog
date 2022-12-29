@@ -10,9 +10,9 @@ upload_date: '28 December, 2022'
 id: 1
 ---
 export const {title, sub, desc, cate, tags, thumb, author, upload_date} = frontmatter
-import PostCard from '../../components/PostCard.astro'
-import Image from '../../components/Image.astro'
-import Paragraph from '../../components/Paragraph.astro'
+import PostCard from '../components/PostCard.astro'
+import Image from '../components/Image.astro'
+import Paragraph from '../components/Paragraph.astro'
 
 <PostCard title={title} cate={cate} author={author} tags={tags} upload_date={upload_date}>
 <Image img={thumb} w='100%' h='250px' p='cover' />

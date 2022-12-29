@@ -1,7 +1,7 @@
 ---
-const posts = await Astro.glob('./*.mdx')
+const posts = await Astro.glob('../../posts/*.mdx')
 export async function getStaticPaths() {
-  const test = await Astro.glob('./*.mdx')
+  const test = await Astro.glob('../../posts/*.mdx')
   return test.map((e:any) => ({
         params: {
             posts: e.title.replace(/[ ]/g, '_')

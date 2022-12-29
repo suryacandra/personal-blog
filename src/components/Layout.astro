@@ -8,7 +8,7 @@ export interface Props {
 }
 import "../style/base.css"
 import { SEO } from "astro-seo";
-const posts = await Astro.glob('../pages/posts/*.mdx')
+const posts = await Astro.glob('../posts/*.mdx')
 const tags = [...new Set(posts.map((e:any) => e.tags).toString().split(','))]
 const year = [... new Set(posts.map((e:any) => e.upload_date.split(',')[1].trim()))]
 const categories = [... new Set(posts.map((e:any) => e.cate).toString().split(','))]
